@@ -1,13 +1,8 @@
 let productos = [
-    {id:1, nombre:"Doble Cuarto de Libra con Queso", calorias:771, descripcion:"Imaginá la sensación del clásico Cuarto de Libra. Imaginalo con un medallón de deliciosa carne 100% vacuna, queso cheddar, cebolla, kétchup y mostaza ¿Listo? Ahora duplicá esa sensación. Ya tenés el Doble Cuarto en la cabeza.", imagen:"https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kqXt7Sq2/200/200/original?country=ar", precio:2500, categoria:"hamburguesas"},
-    {id:2, nombre:"Big Mac", calorias:505, descripcion:"Quizás sean las dos hamburguesas de carne 100% vacuna con esa salsa especial y queso derretido, el toque de cebolla y la frescura de la lechuga o el crocante del pepino, lo que la hace la hamburguesa más famosa del mundo. Un sabor único.", imagen:"https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kqX3vl0y/200/200/original?country=ar", precio:2600, categoria:"hamburguesas"},
-    {id:3, nombre:"McNífica", calorias:513, descripcion:"En un mundo donde todos buscan lo nuevo todo el tiempo, la McNífica viene a rectificar lo bueno de ser clásico. Carne, queso cheddar, tomate, lechuga y cebolla, acompañados de kétchup, mostaza y mayonesa.", imagen:"https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kqXXaUUP/200/200/original?country=ar", precio:2700, categoria:"hamburguesas"},
-    {id:4, nombre:"Papas Grandes", calorias:339, descripcion:"Calientes, crujientes y deliciosas, tus aliadas perfectas para cualquier comida. Disfrutá de nuestras papas mundialmente famosas, desde la primera hasta la última.", imagen:"https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kcXXQgnB/200/200/original?country=ar", precio:1500, categoria:"papas"},
-    {id:5, nombre:"Papas Medianas", calorias:292, descripcion:"Nuestro sello. Las aliadas perfectas para cualquier comida. Disfrutá de nuestras papas mundialmente famosas, desde la primera hasta la última. Crujientes y deliciosas, no vas a parar hasta terminarlas todas.", imagen:"https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kcXmVCCk/200/200/original?country=ar", precio:1300, categoria:"papas"},
-    {id:6, nombre:"Papas pequeñas", calorias:192, descripcion:"Calientes, crujientes y deliciosas, tus aliadas perfectas para cualquier comida. Disfrutá de nuestras papas mundialmente famosas, desde la primera hasta la última en su versión pequeña.", imagen:"https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kcXUUjwZ/200/200/original?country=ar", precio:1100, categoria:"papas"},
-    {id:7, nombre:"Sundae de Dulce de Leche", calorias:257, descripcion:"El exquisito helado de vainilla que ya conoces y te encanta, pero bañado de una salsa de dulce de leche que te encantará aún más.", imagen:"https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$sundae-dulce-de-leche.png/200/200/original?country=ar", precio:1000, categoria:"postres"},
-    {id:8, nombre:"McFlurry Oreo", calorias:424, descripcion:"Un helado de vainilla que se banca compartir el protagonismo con trocitos de deliciosas galletitas Oreo y la salsa que elijas. Amalo hasta el final.", imagen:"https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kqXt7Sq2/200/200/original?country=ar", precio:1800, categoria:"postres"}
-];
+    {id:1, nombre:"Muffin de animales", calorias:302, descripcion:"Muffins con formas de animales sabor limón, rellenos de ganash y dulce de leche.", imagen:"https://truffle-assets.tastemadecontent.net/d24d84df-pxqrocxwsjcc_4oolfidnnqwyykmog2iggk_dog-cupcakes_landscapethumbnail_en.png", precio:2300, categoria:"Pasteleria"},
+    {id:2, nombre:"Galletas de Nube", calorias:97, descripcion:"Galletas de naranja con forma de nube, cubiertas con azúcar, ideal para eventos infantiles.", imagen:"https://i.pinimg.com/originals/ec/43/98/ec439888e354d25fcf75f1b28f247f3f.jpg", precio:1400, categoria:"Galletas"},
+    {id:3, nombre:"Magdalenas Monstruosas", calorias:183, descripcion:"Magdalenas rellenas con chips de chocolate, bañadas en crema de chantilli y sabor limón.", imagen:"https://estaticos-cdn.prensaiberica.es/clip/a98cfea4-d7ca-4b04-8ea0-6084e9eb52c8_16-9-aspect-ratio_default_0.jpg", precio:1950, categoria:"Pasteleria"},
+   ];
 
 const guardarProductosLS = (productos) => {
     localStorage.setItem("productos", JSON.stringify(productos));
@@ -22,55 +17,77 @@ const renderProductos = () => {
     let contenidoHTML = "";
 
     productos.forEach(producto => {
-        contenidoHTML += `<div class="col-md-3 mb-5 text-center"
-        <div class="card">
-        <a href="producto.html" onclick="guardarProductoLS(${producto.id})"><img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}"></a>
-        <div class="card-body">
-          <h5 class="card-title">${producto.nombre}</h5>
-          <p class="card-text">$${producto.precio}</p>
-          <a href="#" class="btn btn-warning" onclick="agregarProductoCarrito(${producto.id})">Agregar (+)</a>
-        </div>
-        </div>
-        </div>`;
+        contenidoHTML += `
+            <div class="col-md-3 col-sm-6 mb-5">
+                <div class "card">
+                    <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}">
+                    <div class="card-body">
+                        <h5 class="card-title">${producto.nombre}</h5>
+                        <h4 class="card-text">$${producto.precio}</h4>
+                        <a href="#" class="btn btn-success" onclick="agregarProductoCarrito(${producto.id})">Agregar al Carro</a>
+                    </div>
+                </div>
+            </div>
+        `;
     });
 
+    contenidoHTML = `<div class="row">${contenidoHTML}</div>`;
     document.getElementById("contenido").innerHTML = contenidoHTML;
+}
+
+const test = (id) => {
+    const carrito = cargarCarritoLS();
+
+    if (estaEnElCarrito(id)) {
+        const producto = carrito.find(item => item.id === id);
+        producto.cantidad += 1;
+    } else {
+        const producto = buscarProducto(id);
+        producto.cantidad = 1;
+        carrito.push(producto);
+    }
+
+    guardarCarritoLS(carrito);
+    renderBotonCarrito();
+
+    Swal.fire({
+        icon: 'success',
+        title: 'Producto Agregado al Carro',
+        text: 'El producto se ha agregado correctamente al carrito.',
+        confirmButtonText: 'Cerrar'
+    });
 }
 
 const renderCarrito = () => {
     const productos = cargarCarritoLS();
     let contenidoHTML;
-
     if (cantProductosCarrito() > 0) {
-        contenidoHTML = `<table class="table">
-        <tr>
-        <td colspan="7" class="text-end"><button class="btn btn-warning" onclick="vaciarCarrito()" title="Vaciar Carrito">Vaciar Carrito [x]</button></td>
-        </tr>`;
+        contenidoHTML = `<table class="table">`;
 
         productos.forEach(producto => {
             contenidoHTML += `<tr>
-            <td><img src="${producto.imagen}" alt="${producto.nombre}" width="64"></td>
-            <td class="align-middle">${producto.nombre}</td>
-            <td class="align-middle">${producto.calorias} kcal</td>
-            <td class="align-middle">$${producto.precio}</td>
-            <td class="align-middle"><button class="btn btn-warning rounded-circle" onclick="decrementarCantidadProducto(${producto.id})">-</button> ${producto.cantidad} <button class="btn btn-warning rounded-circle" onclick="incrementarCantidadProducto(${producto.id})">+</button></td>
-            <td class="align-middle">$${producto.precio * producto.cantidad}</td>
-            <td class="align-middle text-end"><img src="images/trash.svg" alt="Eliminar" width="24" onclick="eliminarProductoCarrito(${producto.id})"></td>
+                <td><img src="${producto.imagen}" alt="${producto.nombre}" width="32"></td>
+                <td class="align-items-center">${producto.nombre}</td>
+                <td class="align-items-center">$${producto.precio} <button class="btn btn-warning rounded-circle" onclick="decrementarCantidadProducto(${producto.id})">-</button>${producto.cantidad}<button class="btn btn-warning rounded-circle" onclick="incrementarCantidadProducto(${producto.id})"> + </button></td>
+                <td class="align-items-center">$${producto.precio * producto.cantidad}</td>
+                <td><img src="../assets/Icon/trash-fill.svg" class="card-img-top" alt="Eliminar" width="24" onclick="eliminarProductoCarrito(${producto.id})"></td>
             </tr>`;
         });
 
         contenidoHTML += `<tr>
-        <td>&nbsp;</td>
-        <td>Total</td>
-        <td colspan="3" class="text-start"><b>${sumaCaloriasCarrito()} kcal</b></td>
-        <td><b>$${sumaProductosCarrito()}</b></td>
-        <td>&nbsp;</td>
+            <td>Total</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="3" class="text-start"><b>$${sumaProductosCarrito()}</b></td>
+            <td>&nbsp;</td>
         </tr>
         </table>`;
     } else {
-        contenidoHTML = `<div class="alert alert-warning my-5 text-center" role="alert">No se encontaron Productos en el Carrito!</div>`;
+        contenidoHTML = `<div class="alert alert-warning my-5 text-center" role="alert">
+            No hay productos en el carrito
+        </div>`;
     }
-    
+
     document.getElementById("contenido").innerHTML = contenidoHTML;
 }
 
@@ -80,20 +97,6 @@ const guardarCarritoLS = (carrito) => {
 
 const cargarCarritoLS = () => {
     return JSON.parse(localStorage.getItem("carrito")) || [];
-}
-
-const guardarProductoLS = (id) => {
-    localStorage.setItem("producto", JSON.stringify(id));
-}
-
-const cargarProductoLS = () => {
-    return JSON.parse(localStorage.getItem("producto")) || [];
-}
-
-const vaciarCarrito = () => {
-    localStorage.removeItem("carrito");
-    renderCarrito();
-    renderBotonCarrito();
 }
 
 const agregarProductoCarrito = (id) => {
@@ -110,14 +113,36 @@ const agregarProductoCarrito = (id) => {
 
     guardarCarritoLS(carrito);
     renderBotonCarrito();
+
+    Swal.fire({
+        icon: 'success',
+        title: 'Producto Agregado al Carro',
+        text: 'El producto se ha agregado correctamente al carrito.',
+        confirmButtonText: 'Cerrar'
+    });
 }
 
 const eliminarProductoCarrito = (id) => {
     const carrito = cargarCarritoLS();
-    const nuevoCarrito = carrito.filter(item => item.id !== id);
-    guardarCarritoLS(nuevoCarrito);
-    renderCarrito();
+    const producto = carrito.find(item => item.id === id);
+
+    if (producto.cantidad > 1) {
+        producto.cantidad -= 1;
+    } else {
+        const nuevoCarrito = carrito.filter(item => item.id !== id);
+        guardarCarritoLS(nuevoCarrito);
+    }
+
     renderBotonCarrito();
+    renderCarrito();
+
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'El producto ha sido eliminado del carrito',
+        showConfirmButton: false,
+        timer: 1500
+    });
 }
 
 const incrementarCantidadProducto = (id) => {
@@ -132,7 +157,6 @@ const incrementarCantidadProducto = (id) => {
 const decrementarCantidadProducto = (id) => {
     const carrito = cargarCarritoLS();
     const producto = carrito.find(item => item.id === id);
-
     if (producto.cantidad > 1) {
         producto.cantidad -= 1;
         guardarCarritoLS(carrito);
@@ -146,32 +170,22 @@ const decrementarCantidadProducto = (id) => {
 const buscarProducto = (id) => {
     const productos = cargarProductosLS();
     let producto = productos.find(item => item.id === id);
-
     return producto;
 }
 
 const estaEnElCarrito = (id) => {
     const productos = cargarCarritoLS();
-
     return productos.some(item => item.id === id);
 }
 
 const cantProductosCarrito = () => {
     const carrito = cargarCarritoLS();
-
     return carrito.reduce((acumulador, item) => acumulador += item.cantidad, 0);
 }
 
 const sumaProductosCarrito = () => {
     const carrito = cargarCarritoLS();
-
     return carrito.reduce((acumulador, item) => acumulador += item.precio * item.cantidad, 0);
-}
-
-const sumaCaloriasCarrito = () => {
-    const carrito = cargarCarritoLS();
-
-    return carrito.reduce((acumulador, item) => acumulador += item.calorias * item.cantidad, 0);
 }
 
 const renderBotonCarrito = () => {
@@ -179,14 +193,46 @@ const renderBotonCarrito = () => {
     totalCarrito.innerHTML = cantProductosCarrito();
 }
 
-const renderProducto = () => {
-    const idProducto = cargarProductoLS();
-    const producto = buscarProducto(idProducto);
+// main.js
 
-    document.getElementById("imagenProducto").src = producto.imagen;
-    document.getElementById("tituloProducto").innerHTML = producto.nombre;
-    document.getElementById("caloriasProducto").innerHTML = producto.calorias + " kcal";
-    document.getElementById("descripcionProducto").innerHTML = producto.descripcion;
-    document.getElementById("precioProducto").innerHTML = "$" + producto.precio;
-    document.getElementById("botonAgregar").innerHTML= `<a href="#" class="btn btn-warning" onclick="agregarProductoCarrito(${producto.id})">Agregar (+)</a>`;
+const renderProductosPasteleria = () => {
+    const productosPasteleria = productos.filter(producto => producto.categoria === "Pasteleria");
+    
+    const contenidoHTML = productosPasteleria.map(producto => `
+        <div class="col-md-3 col-sm-6 mb-5">
+            <div class="card">
+                <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}">
+                <div class="card-body">
+                    <h5 class="card-title">${producto.nombre}</h5>
+                    <h4 class="card-text">$${producto.precio}</h4>
+                    <a href="#" class="btn btn-success" onclick="agregarProductoCarrito(${producto.id})">Agregar al Carro</a>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    document.getElementById("productos-pasteleria").innerHTML = `<div class="row">${contenidoHTML}</div>`;
 }
+
+
+
+const renderProductosGalletas = () => {
+    const productosGalletas = productos.filter(producto => producto.categoria === "Galletas");
+    
+    const contenidoHTML = productosGalletas.map(producto => `
+        <div class="col-md-3 col-sm-6 mb-5">
+            <div class="card">
+                <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}">
+                <div class="card-body">
+                    <h5 class="card-title">${producto.nombre}</h5>
+                    <h4 class="card-text">$${producto.precio}</h4>
+                    <a href="#" class="btn btn-success" onclick="agregarProductoCarrito(${producto.id})">Agregar al Carro</a>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    document.getElementById("productos-galletas").innerHTML = `<div class="row">${contenidoHTML}</div>`;
+}
+
+

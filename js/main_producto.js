@@ -1,2 +1,0 @@
-renderProducto();
-renderBotonCarrito();
